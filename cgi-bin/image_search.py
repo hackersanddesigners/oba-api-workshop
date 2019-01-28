@@ -4,11 +4,12 @@
 # make sure this image inside /cgi-bin and that its executable bit is set
 # then run: python3 -m http.server --cgi (or equivalent)
 # visit: http://0.0.0.0:8000/cgi-bin/image_search.py in your browser
-#
-from ..settings import *
+
+import sys, os
+sys.path.append(os.getcwd())
+from settings import *
 import cgi
 import requests #install from: http://docs.python-requests.org/en/master/
-
 form = cgi.FieldStorage()
 value = ""
 

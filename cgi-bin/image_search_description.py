@@ -2,7 +2,8 @@
 
 # example for searching in the contextual websearch image api
 # by: heerko@hackersanddesigners.nl
-#
+import sys, os
+sys.path.append(os.getcwd())
 from settings import *
 import cgi
 import requests #install from: http://docs.python-requests.org/en/master/
@@ -42,7 +43,7 @@ if "q" in form:
 	#from io import BytesIO
 
 	# Replace <Subscription Key> with your valid subscription key.
-	subscription_key = MS_Azure_Key
+	subscription_key = MS_Azure_Image_Key
 	assert subscription_key
 
 	# You must use the same region in your REST call as you used to get your

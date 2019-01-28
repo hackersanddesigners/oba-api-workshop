@@ -15,7 +15,7 @@ import requests #install from: http://docs.python-requests.org/en/master/
 # Your RapidAPI_Key gets loaded from the .env file in settings.py
 
 #The query parameters: (update according to your search query)
-q = "black" #the search query
+q = "feminist" #the search query
 pageNumber = 1 #the number of requested page
 pageSize = 1 #the size of a page
 autoCorrect = False #autoCorrectspelling
