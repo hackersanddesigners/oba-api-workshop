@@ -17,7 +17,7 @@ RapidAPI_Key = 987654321
 MS_Azure_TTS_Key = 123456789" >> .env
 ```
 
-```python3
+```python
 # Then add a line for every key in settings.py
 OBA_API_Key = os.getenv('OBA_API_Key')
 ```
