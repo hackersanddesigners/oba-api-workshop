@@ -1,4 +1,5 @@
 # Search for an image on Contextual websearch via the command line
+# Outputs the URL of the image found
 from settings import *
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -9,13 +10,12 @@ dotenv_path = join(dirname(__file__), '.env')
 # Load file from the path.
 load_dotenv(dotenv_path)
 
-
 import requests #install from: http://docs.python-requests.org/en/master/
 
 # Your RapidAPI_Key gets loaded from the .env file in settings.py
 
 #The query parameters: (update according to your search query)
-q = "feminist" #the search query
+q = "world" #the search query
 pageNumber = 1 #the number of requested page
 pageSize = 1 #the size of a page
 autoCorrect = False #autoCorrectspelling
