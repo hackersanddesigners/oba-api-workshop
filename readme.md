@@ -1,13 +1,9 @@
 oba api workshop
 ================
 
-## What is this?
-
-Proposal for some examples for the H&D API workshop @ OBA.
-
 All examples store the API keys in a file called `.env` in the project root.
 
-## To install
+## Setup
 
 Make a file called `.env`
 
@@ -18,9 +14,9 @@ $ touch .env
 Add your API keys to the `.env` file (or use your favorite text editor)
 
 ```
-$ echo "OBA_API_Key = ABCD1234 \
-RapidAPI_Key = 987654321 \
-MS_Azure_TTS_Key = 123456789" >> .env
+$ echo "OBA_API_Key = ABCD1234 >> .env
+$ echo RapidAPI_Key = 987654321 >> .env
+$ echo MS_Azure_TTS_Key = 123456789" >> .env
 ```
 
 Then add a line for every key in `settings.py`
@@ -36,7 +32,7 @@ $ python3.4 -m venv env
 $ source env/bin/activate
 ```
 
-Then use python w/ `python` and install the following packages
+Then use python with `python` and install the following packages
 
 ```
 $ pip install python-dotenv
