@@ -18,7 +18,6 @@ q = "hacking"
 pagesize = 1
 
 query = "https://zoeken.oba.nl/api/v1/search/?authorization=" + oba_api_key + "&q=" + sys.argv[1] + "&pagesize=" + sys.argv[2]
-
 result = requests.get(query)
 data = result.text
 data = xmltodict.parse(data)

@@ -1,12 +1,10 @@
 # Search for a book in the oba API
 # then pass this image to the imagga ML image analysis
-
+import sys
 from settings import *
 import requests #install from: http://docs.python-requests.org/en/master/
-from requests_xml import XMLSession
+import xmltodict
 import json
-
-import requests #install from: http://docs.python-requests.org/en/master/
 
 # Your OBA_API_Key gets loaded from the .env file in settings.py
 
@@ -14,25 +12,27 @@ import requests #install from: http://docs.python-requests.org/en/master/
 q = "hacking" # the search query. Change the hacking for something else to change the query.
 pageSize = 1 # one result for now
 
-query = "https://zoeken.oba.nl/api/v1/search/?authorization={}&q={}&pagesize={}".format(oba_api_key, q, pageSize)
+query = "https://zoeken.oba.nl/api/v1/search/?authorization={}&q={}&pagesize={}".format(oba_api_key, sys.argv[1], pageSize)
+result = requests.get(query)
 
-session = XMLSession()
-result = session.get(query)
+# the oba API returns an XML document. we convert the xml formatted file to json, which is "easier" to read and a more widespread format
+data = xmltodict.parse(result.text)
 
-# the oba API returns an XML document.
-# requests_xml allows us to query/search the XML with xpath.
-# get the cover image from the XML
-image_url =  result.xml.xpath('//coverimage[2]/text()', first=True)
+# uncomment this to print the full result
+# print(json.dumps(data, indent=4, sort_keys=True))
 
-print( "cover image: " + image_url )
+# get the image url
+for k,v in data['aquabrowser']['results'].items():
+  image_url = v['coverimages']['coverimage'][-1]['#text']
+  print("cover image: " + image_url)
 
 # now send the image to the ML algorithm
-response = requests.get('https://api.imagga.com/v2/tags?image_url=%s' % image_url,
+response = requests.get('https://api.imagga.com/v2/tags?image_url=' + image_url,
                         auth=(imagga_api_key, imagga_api_secret))
 
-print( json.dumps( response.json(), indent=2 ) )
+print(json.dumps(response.json(), indent=4, sort_keys=True))
 
-#the response looks like this:
+# the response looks like this:
 '''
 {
   "result": {
@@ -57,6 +57,9 @@ print( json.dumps( response.json(), indent=2 ) )
   }
 }
 '''
-result = response.json();
-for tag in result['result']['tags']:
-	print( tag['tag']['en'] )
+
+# result = response.json();
+# print(json.dumps(result, indent=4, sort_keys=True))
+
+# for tag in result['result']['tags']:
+#   print( tag['tag']['en'] )
