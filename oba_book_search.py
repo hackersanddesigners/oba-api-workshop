@@ -1,34 +1,56 @@
-# Search for a book in the oba API
+# search for a book in the oba api
 from settings import *
 from os.path import join, dirname
 from dotenv import load_dotenv
-from requests_xml import XMLSession
+import sys
+import requests
+import xmltodict
+import json
 
-# Get the api keys from the .env file
+# get the api keys from the .env file
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
-import requests #install from: http://docs.python-requests.org/en/master/
+# your oba_api_key gets loaded from the .env file in settings.py
 
-# Your OBA_API_Key gets loaded from the .env file in settings.py
+# the query parameters: (update according to your search query)
+q = "hacking"
+pagesize = 1
 
-# The query parameters: (update according to your search query)
-q = "hacking" # the search query. Change the hacking for something else to change the query.
-pageSize = 1 # one result for now
+query = "https://zoeken.oba.nl/api/v1/search/?authorization=" + oba_api_key + "&q=" + sys.argv[1] + "&pagesize=" + sys.argv[2]
 
-query = "https://zoeken.oba.nl/api/v1/search/?authorization={}&q={}&pagesize={}".format(OBA_API_Key, q, pageSize)
+result = requests.get(query)
+data = result.text
+data = xmltodict.parse(data)
 
-session = XMLSession()
-result = session.get(query)
+# print(json.dumps(data, indent=4, sort_keys=True))
+# print('---')
 
-# the oba API returns an XML document.
-# requests_xml allows us to query/search the XML with xpath.
-# the code below gives us the title of the book
-title =  result.xml.xpath('//title', first=True)
-print( title.text )
-# or get the cover image from the XML
-# cover =  result.xml.xpath('//coverimage[1]/text()', first=True)
-# print( cover )
+for k,v in data['aquabrowser']['results'].items():
+  # print(json.dumps(v, indent=4, sort_keys=True))
+  if 'titles' in v:
+    title = v['titles']['title']['#text']
+    print('title: ' + title + '\n')
 
-# To see all the data we got back uncomment the line below
-# print( result.xml.raw_xml )
+    cover = v['coverimages']['coverimage']
+    print('cover:')
+    for img in cover:
+      print('  → ' + img['#text'])
+
+    print('\n--\n')
+  else:
+    for entry in v:
+      title = entry['titles']['title']
+      if '#text' in title:
+        print('title: ' + title['#text'] + '\n')
+      else:
+        for t in title:
+          print('title: ' + t['#text'] + '\n')
+
+      cover = entry['coverimages']['coverimage']
+      # print(cover)
+      print('cover:')
+      for img in cover:
+        print('  → ' + img['#text'])
+
+      print('\n--\n')

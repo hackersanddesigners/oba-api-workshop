@@ -14,15 +14,15 @@ $ touch .env
 Add your API keys to the `.env` file (or use your favorite text editor)
 
 ```
-$ echo "OBA_API_Key = ABCD1234 >> .env
-$ echo RapidAPI_Key = 987654321 >> .env
-$ echo MS_Azure_TTS_Key = 123456789" >> .env
+$ echo "oba_api_key = abcd1234" >> .env
+$ echo "rapidapi_key = 987654321" >> .env
+$ echo "ms_azure_tts_key = 123456789" >> .env
 ```
 
 Then add a line for every key in `settings.py`
 
 ```
-OBA_API_Key = os.getenv('OBA_API_Key')
+oba_api_key = os.getenv('oba_api_key')
 ```
 
 If installing on your own machine, make sure you have python 3 and install the needed libraries. If using python 3.4 or higher, we suggest to make a new python virtual environment using the `venv` option, so to not install the packages globally (you don't want to deal [with this](https://xkcd.com/1987/) afterwards)
@@ -37,7 +37,7 @@ Then use python with `python` and install the following packages
 ```
 $ pip install python-dotenv
 $ pip install requests
-$ pip install requests_xml
+$ pip install xmltodict
 ```
 
 ## Code examples

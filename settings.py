@@ -8,11 +8,9 @@ dotenv_path = join(dirname(__file__), '.env')
 # Load file from the path.
 load_dotenv(dotenv_path)
 
-OBA_API_Key = os.getenv('OBA_API_Key')
-RapidAPI_Key = os.getenv('RapidAPI_Key')
+oba_api_key = os.getenv('oba_api_key')
+rapidapi_key = os.getenv('rapidapi_key')
 imagga_api_key = os.getenv('imagga_api_key')
 imagga_api_secret = os.getenv('imagga_api_secret')
-
-
 # MS_Azure_Key = os.getenv('MS_Azure_Key')
 # MS_Azure_Image_Key = os.getenv('MS_Azure_Image_Key')

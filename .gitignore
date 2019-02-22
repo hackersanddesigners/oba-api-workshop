@@ -1,3 +1,5 @@
 *.wav
 __pycache__
 .env
+env/
+.python-version

@@ -6,7 +6,6 @@ import requests #install from: http://docs.python-requests.org/en/master/
 from requests_xml import XMLSession
 import json
 
-
 import requests #install from: http://docs.python-requests.org/en/master/
 
 # Your OBA_API_Key gets loaded from the .env file in settings.py
@@ -15,7 +14,7 @@ import requests #install from: http://docs.python-requests.org/en/master/
 q = "hacking" # the search query. Change the hacking for something else to change the query.
 pageSize = 1 # one result for now
 
-query = "https://zoeken.oba.nl/api/v1/search/?authorization={}&q={}&pagesize={}".format(OBA_API_Key, q, pageSize)
+query = "https://zoeken.oba.nl/api/v1/search/?authorization={}&q={}&pagesize={}".format(oba_api_key, q, pageSize)
 
 session = XMLSession()
 result = session.get(query)
