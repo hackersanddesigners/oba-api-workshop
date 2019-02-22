@@ -1,5 +1,7 @@
 # Search for an image on Contextual websearch via the command line
 # Outputs the URL of the image found
+import sys
+import json
 from settings import *
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -21,12 +23,16 @@ pageSize = 1 #the size of a page
 autoCorrect = False #autoCorrectspelling
 safeSearch = False #filter results for adult content
 
-response=requests.get("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q={}&pageNumber={}&pageSize={}&autocorrect={}&safeSearch={}".format(q, pageNumber, pageSize, autoCorrect,safeSearch),
+response=requests.get("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q={}&pageNumber={}&pageSize={}&autocorrect={}&safeSearch={}".format(sys.argv[1], pageNumber, sys.argv[2], autoCorrect,safeSearch),
 headers={
-"X-RapidAPI-Key": RapidAPI_Key
+"X-RapidAPI-Key": rapidapi_key
 }
 ).json()
 
-value = response["value"]
-url = value[0]["url"]
-print(url)
+# print(json.dumps(response, indent=4, sort_keys=True))
+
+result = response["value"]
+
+for item in result:
+  url = item['url']
+  print('→ ' + url + '\n')
