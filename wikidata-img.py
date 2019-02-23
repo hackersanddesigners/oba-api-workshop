@@ -42,7 +42,7 @@ print(img_url)
 r = s.get(url=img_url)
 data = r.text
 
-soup = BeautifulSoup(data, "lxml")
+soup = BeautifulSoup(data, "html.parser")
 img_deeplink = soup.find('a', class_="internal")
 print('---')
 print('https:' + img_deeplink['href'].replace(' ', '_'))
