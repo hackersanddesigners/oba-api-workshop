@@ -49,8 +49,19 @@ The most basic example. Edit the line q = "black" to change the query.
 Then run:
 
 ```
-$ python cws.py
+$ python ??
 ```
+
+### oba_pub_search.py
+
+
+```
+$ python oba_pub_search.py <publisher-name> <total-number-of-pages>
+```
+
+the API does not give back total number of pages (?), so the poor way to do it is to use OBA's website search tool, eg <https://zoeken.oba.nl/?q=publisher%3A%22IHLIA%22&uilang=en> and count number of pages at the bottom :P
+
+(we could use a generator to be fancy tho!!)
 
 ### imagga.py
 
