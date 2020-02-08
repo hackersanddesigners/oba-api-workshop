@@ -14,7 +14,8 @@ load_dotenv(dotenv_path)
 
 # your oba_api_key gets loaded from the .env file in settings.py
 
-for i in range(int(sys.argv[2])):
+result_index = []
+for i in range(1, int(sys.argv[2])):
   query = "https://zoeken.oba.nl/api/v1/search/?authorization=" + oba_api_key + "&q=publisher%3A" + sys.argv[1] + "&page=" + str(i)
   result = requests.get(query)
   data = result.text
