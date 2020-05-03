@@ -25,19 +25,18 @@ Then add a line for every key in `settings.py`
 oba_api_key = os.getenv('oba_api_key')
 ```
 
-If installing on your own machine, make sure you have python 3 and install the needed libraries. If using python 3.4 or higher, we suggest to make a new python virtual environment using the `venv` option, so to not install the packages globally (you don't want to deal [with this](https://xkcd.com/1987/) afterwards)
+If installing on your own machine, make sure you have python 3 and install the needed libraries. We’re using `pipenv` to manage packages. You can either use `pip` and install everything that’s in the `Pipfile`, or install `pipenv` too. [Check here](https://github.com/pypa/pipenv) for up-to-date installation methods.
+
+Then do
 
 ```
-$ python3.4 -m venv env
-$ source env/bin/activate
+$ pipenv install
 ```
 
-Then use python with `python` and install the following packages
+To enable the python environment, do
 
 ```
-$ pip install python-dotenv
-$ pip install requests
-$ pip install xmltodict
+$ pipenv shell
 ```
 
 ## Code examples
